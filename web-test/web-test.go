@@ -13,13 +13,6 @@ func apiHandler() {
 	r.GET("/", func(c *gin.Context) {
 		c.Redirect(http.StatusTemporaryRedirect, "static")
 	})
-
-	r.GET("/foward", func(context *gin.Context) {
-		context.JSON(200, gin.H{
-			"message": "go foward",
-		})
-	})
-
 	r.Run(":8080")
 }
 

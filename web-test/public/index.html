@@ -1,19 +1,44 @@
 <html>
-	<script src="https://unpkg.com/vue"></script>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  		<link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+  		<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+		  
+		<script src="https://unpkg.com/vue"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+	</head>
 	<div id="app">
-		<p>{{ message }}</p>
-		<button type="button" @click="clickButton">Click Me!</button>
+		<v-app>
+			<v-container>
+				<div class="mb-5">{{ message }}</div>
+				<v-btn @click="gofoward">앞으로</v-btn>
+				<v-btn type="button" @click="goback">뒤로</v-btn>
+				<v-btn type="button" @click="goleft">좌로</v-btn>
+				<v-btn type="button" @click="goright">우로</v-btn>				
+			</v-container>
+		</v-app>
 	</div>
 
 	<script>
 		new Vue({
+			vuetify: new Vuetify(),
   			el: '#app',
   			data: {
-    			message: 'Hello Vue.js!'
+    			message: '아래 버튼을 누르면 차량이 이동합니다.'
   			},
 			methods: {
-				clickButton() {
-					this.message = 'Click It!';
+				gofoward() {
+					this.message = '앞으로 갑니다.'
+				},
+				goback() {
+					this.message = '뒤로 갑니다.'
+				},
+				goleft() {
+					this.message = '왼쪽으로 갑니다.'
+				},
+				goright() {
+					this.message = '오른쪽으로 갑니다.'
 				}
 			}
 		})
