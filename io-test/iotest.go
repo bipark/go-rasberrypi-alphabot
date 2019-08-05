@@ -21,16 +21,25 @@ func setupPin() {
 	ENB.Output()
 }
 
-func apiHandler() {
-	res := gin.Default()
 
-	res.GET("/foward", func(context *gin.Context) {
+
+func apiHandler() {
+	router := gin.Default()
+
+	router.LoadHTMLGlob("templates/*")
+	router.GET("/index", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+			"title": "Main website",
+		})
+	})
+
+	router.GET("/foward", func(context *gin.Context) {
 		context.JSON(200, gin.H{
 			"message": "go foward",
 		})
 	})
 
-	res.Run()
+	router.Run()
 }
 
 func main() {

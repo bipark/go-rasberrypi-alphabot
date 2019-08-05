@@ -1,0 +1,21 @@
+<html>
+	<script src="https://unpkg.com/vue"></script>
+	<div id="app">
+		<p>{{ message }}</p>
+		<button type="button" @click="clickButton">Click Me!</button>
+	</div>
+
+	<script>
+		new Vue({
+  			el: '#app',
+  			data: {
+    			message: 'Hello Vue.js!'
+  			},
+			methods: {
+				clickButton() {
+					this.message = 'Click It!';
+				}
+			}
+		})
+	</script>
+</html>
