@@ -12,6 +12,9 @@
 	<div id="app">
 		<v-app>
 			<v-container>
+				<div>
+					<img :src="img" width="320" height="240">
+				</div>
 				<div class="mb-5">{{ message }}</div>
 				<v-btn @click="gofoward">앞으로</v-btn>
 				<v-btn type="button" @click="goback">뒤로</v-btn>
@@ -26,32 +29,43 @@
 			vuetify: new Vuetify(),
   			el: '#app',
   			data: {
-    			message: '아래 버튼을 누르면 차량이 이동합니다.'
+				url: "http://127.0.0.1:8080/",
+    			message: '아래 버튼을 누르면 차량이 이동합니다.',
+				img: null
   			},
+
+			mounted() {
+				var stream = new EventSource("http://127.0.0.1:8080/stream")
+				stream.addEventListener("message", function(e){
+					console.log(e);
+					this.img = e.data;
+				})
+			},
+
 			methods: {
 				gofoward() {
-					axios.get('http://127.0.0.1:8080/api/go/foward')
+					axios.get(this.url+'api/go/foward')
 					.then((res)=>{
 						console.log(res.data);
 						this.message = '앞으로 갑니다.'
 					})
 				},
 				goback() {
-					axios.get('http://127.0.0.1:8080/api/go/backward')
+					axios.get(this.url+'api/go/backward')
 					.then((res)=>{
 						console.log(res.data);
 						this.message = '뒤로 갑니다.'
 					})
 				},
 				goleft() {
-					axios.get('http://127.0.0.1:8080/api/go/left')
+					axios.get(this.url+'api/go/left')
 					.then((res)=>{
 						console.log(res.data);
 						this.message = '왼쪽으로 갑니다.'
 					})
 				},
 				goright() {
-					axios.get('http://127.0.0.1:8080/api/go/right')
+					axios.get(this.url+'api/go/right')
 					.then((res)=>{
 						console.log(res.data);
 						this.message = '오른쪽으로 갑니다.'
