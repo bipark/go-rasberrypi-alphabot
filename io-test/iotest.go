@@ -1,10 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/stianeikeland/go-rpio"
 )
+
+func setupPin() {
+
+	err := rpio.Open()
+	if err != nil {
+		fmt.Printf("i/o Open error")
+		return
+	}
+
+}
 
 func apiHandler() {
 	router := gin.Default()
@@ -26,8 +38,6 @@ func apiHandler() {
 }
 func main() {
 
-	// err := gpio.Open()
-	// fmt.Println(err)
 	apiHandler()
 
 }
